@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.3.18)  12 AUG 2021 15:28
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.3.18)  12 AUG 2021 15:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -200,14 +200,22 @@ File: images/kotlin-logo.png Graphic file (type bmp)
 <images/kotlin-logo.png>
 [1
 
+] (./paradigma.toc)
+\tf@toc=\write3
+\openout3 = `paradigma.toc'.
+
+ [2
+
+] [3
+
 ] (./paradigma.aux) ) 
 Here is how much of TeX's memory you used:
- 2703 strings out of 479819
- 47660 string characters out of 5895846
+ 2726 strings out of 479819
+ 48161 string characters out of 5895846
  464889 words of memory out of 5000000
- 19805 multiletter control sequences out of 15000+600000
- 532386 words of font info for 30 fonts, out of 8000000 for 9000
+ 19816 multiletter control sequences out of 15000+600000
+ 532434 words of font info for 36 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 38i,4n,49p,240b,250s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,49p,240b,262s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paradigma.pdf (1 page).
+Output written on paradigma.pdf (3 pages).
