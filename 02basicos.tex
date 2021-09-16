@@ -8,34 +8,79 @@
 \chapterimage{img_superior} % Chapter heading image ==>  Trocar este arquivo por outro 1200x468
 \chapter{ Conceitos b\'{a}sicos da Linguagem Kotlin}
 
-Os livros b\'{a}sicos para o estudo da Linguagem Kotlin s\~{a}o: \cite{skeen2018kotlin}, \cite{}, \cite{} e \cite{}
-
-Neste cap\'{\i}tulo \'{e} apresentado ....  Segundo \cite{}, a linguagem Kotlin,  . . .
-
-De acordo com \cite{Sebesta2018} e \cite{roy04}, a linguagem Scala . . . \cite{Sebesta2018} afirma que a linguagem Python . . .
-
-Considerando que a linguagem Kotlin (\cite{Whaling2020}, \cite{Upadhyaya2019}) \'{e} considerada como ....
-
+Em Kotlin, tudo é um objeto no sentido de que 
+podemos chamar funções e propriedades de membros
+ em qualquer variável. Alguns tipos podem ter uma 
+ representação interna especial - por exemplo, 
+ números, caracteres e booleans podem ser 
+ representados como valores primitivos no tempo 
+ de execução, mas para o usuário eles se parecem
+ com classes comuns.
     %%%%%%%%=================================
+
     \section{Vari\'{a}veis e constantes}
-    %%%%%%%%=================================
+      As variáveis em Kotlin podem ser facilmente 
+    definidas como mutáveis (var) ou imutáveis (val).
+    A ideia é muito semelhante ao uso "final" em variáveis Java.
+    Mas a imutabilidade é um conceito muito importante em Kotlin (e muitas outras línguas modernas).
+   
+    Um objeto imutável é um objeto cujo estado não pode mudar 
+    após a instanciação. Se você precisar de uma versão 
+    modificada do objeto, um novo objeto precisa ser criado.
+    Isso torna a programação muito mais robusta e previsível. 
+    Em Java, a maioria dos objetos são mutáveis, o que significa
+    que qualquer parte do código que tenha acesso ao objeto pode 
+    modificá-lo, afetando o resto do aplicativo.
+
+    Assim, a maneira como pensamos sobre codificação muda um pouco em Kotlin 
+    se quisermos fazer uso da imutabilidade. O conceito-chave: basta usar 
+    val tanto quanto possível. Haverá situações (especialmente no Android,
+    onde não temos acesso ao construtor de muitas classes) onde não será 
+    possível, mas será na maioria das vezes
+
+    Outro ponto é que geralmente não precisamos 
+    especificar tipos de objetos, eles serão inferidos a partir do 
+    valor, o que torna o código mais limpo e mais rápido para ser modificado.
+    \begin{lstlisting}
+      val numero = 1 // Inteiro
+      val nome = "Exemplo" // String  
+    \end{lstlisting}
 
 
+\section{Tipos de Dados B\'{a}sicos}
     %%%%%%%%=================================
-    \section{Tipos de Dados B\'{a}sicos}
-    %%%%%%%%=================================
-
-     %%%........................
-            \subsection{String}
-     %%%........................
+         
+ \lipsum[2]
+  \subsection{Tipos Inteiros}
+  Kotlin fornece um conjunto de tipos embutidos que representam números.
+  Para números inteiros, existem quatro tipos com tamanhos diferentes e, portanto, faixas de valor.
+    \begin{table}[ht]
+      \centering
+      
+      \begin{tabular}{|p{2cm} p{1.5cm} p{6.0cm} p{6.0cm}| cp{2cm}}
+      \hline
+      \textbf{Tipo} \centering & \textbf{Size(Bits)} & \textbf{Valor mínimo} & \textbf{Valor máximo} \\ \hline
+          Byte \centering    & 8  \centering  & -128   & 127                 \\ 
+          Short \centering  & 16  \centering & -32768   & 32767             \\ 
+          Int \centering    & 32  \centering &  -2,147,483,648 ($-2 ^{31}$)      &2,147,483,648 ($2^{31}-1$)            \\ 
+          Long \centering    & 32  \centering &  -9,223,372,036,854,775,808 ($-2 ^{63}$)      &9,223,372,036,854,775,808 ($2^{63}$)              \\ \hline
+      
+      \end{tabular}
+      \label{Tabela1}
+      \end{table}
+      Todas as variáveis inicializadas com valores inteiros não excedem o valor 
+      máximo de ter o tipo inferido . Se o valor inicial exceder esse valor, 
+      então o tipo será . Para especificar o valor explicitamente, apendice o sufixo ao valor.
+     
+            %%%........................
 
     C\'{o}digo fonte para a linguagem Kotlin:
     \begin{lstlisting}
-    object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, world!")
-  }
-}
+      val one = 1 // Int
+      val threeBillion = 3000000000 // Long
+      val oneLong = 1L // Long
+      val oneByte: Byte = 1
+  
     \end{lstlisting}
 
     \begin{lstlisting}
