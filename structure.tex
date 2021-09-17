@@ -499,16 +499,28 @@ addtohook={%
 \usepackage[many]{tcolorbox}
 \tcbset{skin=enhanced}
 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \usepackage{listings}
-         \lstset{ %
-  	      language={Scala}, % % lenguaje de programaci\'{o}n
-  	      basicstyle=\bfseries\ttfamily,
-  	      keywordstyle=\color{blue},
-  	      commentstyle=\color{brown},	
-  	      backgroundcolor=\color{green!10},
-  	      showstringspaces=false
-  	      }
+  \lstdefinelanguage{Kotlin}{
+    comment=[l]{//},
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    emph={delegate, filter, first,and, firstOrNull, forEach, lazy, map, mapNotNull, println, return@},
+    emphstyle={\color{orange}},
+    identifierstyle=\color{black},
+    keywords={abstract, actual, as?, break, by, class, companion, continue, data, do, dynamic, else, enum, expect, false, final, for, fun, get, if, import, in, interface, internal, is, null, object, override, package, private, public, return, set, super, suspend, this, throw, true, try, typealias, val, var, vararg, when, where, while},
+    keywordstyle=\color{blue},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morestring=[s]{"""*}{*"""},
+    ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
+    sensitive=true,
+    stringstyle={\color{codepurple}},
+  }
 
 %----------------------------------------------------------------------------------------
 \usepackage[brazilian,hyperpageref]{backref}

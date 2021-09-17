@@ -11,8 +11,8 @@
 Em Kotlin, tudo é um objeto no sentido de que 
 podemos chamar funções e propriedades de membros
  em qualquer variável. Alguns tipos podem ter uma 
- representação interna especial - por exemplo, 
- números, caracteres e booleans podem ser 
+ representação interna especial por exemplo, 
+ números, caracteres e booleanos podem ser 
  representados como valores primitivos no tempo 
  de execução, mas para o usuário eles se parecem
  com classes comuns.
@@ -21,9 +21,8 @@ podemos chamar funções e propriedades de membros
     \section{Vari\'{a}veis e constantes}
       As variáveis em Kotlin podem ser facilmente 
     definidas como mutáveis (var) ou imutáveis (val).
-    A ideia é muito semelhante ao uso "final" em variáveis Java.
-    Mas a imutabilidade é um conceito muito importante em Kotlin (e muitas outras línguas modernas).
-   
+    A ideia é muito semelhante ao uso \emph{final} em variáveis Java.
+     
     Um objeto imutável é um objeto cujo estado não pode mudar 
     após a instanciação. Se você precisar de uma versão 
     modificada do objeto, um novo objeto precisa ser criado.
@@ -33,37 +32,42 @@ podemos chamar funções e propriedades de membros
     modificá-lo, afetando o resto do aplicativo.
 
     Assim, a maneira como pensamos sobre codificação muda um pouco em Kotlin 
-    se quisermos fazer uso da imutabilidade. O conceito-chave: basta usar 
-    val tanto quanto possível. Haverá situações (especialmente no Android,
+    se quisermos fazer uso da imutabilidade. Haverá situações (especialmente no Android,
     onde não temos acesso ao construtor de muitas classes) onde não será 
     possível, mas será na maioria das vezes
 
     Outro ponto é que geralmente não precisamos 
     especificar tipos de objetos, eles serão inferidos a partir do 
     valor, o que torna o código mais limpo e mais rápido para ser modificado.
-    \begin{lstlisting}
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
       val numero = 1 // Inteiro
       val nome = "Exemplo" // String  
+    \end{lstlisting}
+    Caso seja necessario declarar o tipo da variavel desejada poderá ser feito dessa forma:
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      val numero: Int = 1 // Inteiro
+      val nome: String = "Exemplo" // String  
     \end{lstlisting}
 
 
 \section{Tipos de Dados B\'{a}sicos}
-    %%%%%%%%=================================
+    
+
+    
          
  \lipsum[2]
-  \subsection{Tipos Inteiros}
+  \subsection{Inteiros}
   Kotlin fornece um conjunto de tipos embutidos que representam números.
   Para números inteiros, existem quatro tipos com tamanhos diferentes e, portanto, faixas de valor.
     \begin{table}[ht]
       \centering
       
-      \begin{tabular}{|p{2cm} p{1.5cm} p{6.0cm} p{6.0cm}| cp{2cm}}
-      \hline
-      \textbf{Tipo} \centering & \textbf{Size(Bits)} & \textbf{Valor mínimo} & \textbf{Valor máximo} \\ \hline
+      \begin{tabular}{p{2cm} p{2.5cm} p{6.0cm} p{6.0cm}|cp{1cm}}
+      \textbf{Tipo} \centering & \textbf{Tamanho(Bits)} & \textbf{Valor mínimo} & \textbf{Valor máximo} \\ 
           Byte \centering    & 8  \centering  & -128   & 127                 \\ 
           Short \centering  & 16  \centering & -32768   & 32767             \\ 
           Int \centering    & 32  \centering &  -2,147,483,648 ($-2 ^{31}$)      &2,147,483,648 ($2^{31}-1$)            \\ 
-          Long \centering    & 32  \centering &  -9,223,372,036,854,775,808 ($-2 ^{63}$)      &9,223,372,036,854,775,808 ($2^{63}$)              \\ \hline
+          Long \centering    & 32  \centering &  -9,223,372,036,854,775,808 ($-2 ^{63}$)      &9,223,372,036,854,775,808 ($2^{63}$)\\ 
       
       \end{tabular}
       \label{Tabela1}
@@ -75,42 +79,190 @@ podemos chamar funções e propriedades de membros
             %%%........................
 
     C\'{o}digo fonte para a linguagem Kotlin:
-    \begin{lstlisting}
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
       val one = 1 // Int
       val threeBillion = 3000000000 // Long
       val oneLong = 1L // Long
       val oneByte: Byte = 1
-  
     \end{lstlisting}
 
-    \begin{lstlisting}
-  class Rational(n: Int, d: Int) {
+    
 
-    require(d != 0)
+    \subsection{Float}
+    Para números reais, Kotlin fornece tipos de pontos flutuantes Float e Double
+    
+    \begin{tabular}{p{1cm} p{2.5cm} p{3.0cm} p{3.0cm} p{3.5cm} cp{2cm}}
+      
+      \textbf{Tipo} \centering & \textbf{Tamanho(Bits)} & \textbf{Bits significativos} & \textbf{Bits expoentes} & \textbf{Digitos decimais} \\ 
+          Float \centering     & 32  \centering         &  24    & 8              & 6-7 \\
+          Double \centering    & 64  \centering         &  53  & 11       &15-16  \\
+      \end{tabular}
+      Por padrão, se você declarar uma variável 
+      atribuindo um número do tipo float assim:
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      var x = 134.5 
+      \end{lstlisting}
+      Você criará um objeto e uma variável do tipo Double.
+      Se você adicionar um "F" ou "f" ao final do número, 
+      um Float será criado em vez disso
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      var x = 134.5F 
+      \end{lstlisting}
+   
+      \subsection{Booleanos}
+      Variáveis booleanas são usadas para valores que podem 
+      ser verdadeiros ou falsos. 
 
-    private val g = gcd(n.abs, d.abs)
-    val numer = n / g
-    val denom = d / g
+      As operações incorporadas em booleans incluem:
+      \begin{itemize}
+      \item
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+Disjunção - ||
+      \end{lstlisting}
 
-    def this(n: Int) = this(n, 1)
+      \item
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+Conjunção - &&
+      \end{lstlisting}
 
-    def + (that: Rational): Rational =
-      new Rational(
-        numer * that.denom + that.numer * denom,
-        denom * that.denom
-      )
+      \item
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+Conjunção - !
+      \end{lstlisting}
+      \end{itemize}
+      
+      Cria-se um objeto e a 
+      variável booleano se declarar uma variável usando o 
+      código em seguida:
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      val Um: Boolean = true
+      val Dois: Boolean = false
+      val Null: Boolean? = null
+      
+      println(Um || Dois)//true
+      println(Um && Dois)//false
+      println(!Um)//false
+      \end{lstlisting}
 
-    def + (i: Int): Rational =
-      new Rational(numer + i * denom, denom)
+      \subsection{Caracteres e Strings}
+      Variáveis char são usadas para caracteres únicos. 
+      Você cria uma variável Char, designando um caractere 
+      em citações simples como esta:
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        var letra = 'A'
+      \end{lstlisting}
+      As variáveis de string são usadas para manter
+      vários caracteres amarrados. Você cria uma 
+      variável String atribuindo os caracteres 
+      com aspas duplas:
+      \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        var letra = "Livro"
+      \end{lstlisting}
 
-    def - (that: Rational): Rational =
-      new Rational(
-        numer * that.denom - that.numer * denom,
-        denom * that.denom
-      )
+
+    \section{Operadores e Express\~{o}es em Kotlin}
+    Kotlin suporta o conjunto padrão de operações 
+    aritméticas sobre números. Eles são declarados 
+    como membros de classes apropriadas.
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    fun main() {
+      println(1 + 2)                //3
+      println(2_500_000_000L - 1L) //2499999999
+      println(3.14 * 2.71)        //8.5094
+      println(10.0 / 3)          //8.5094
+    }
     \end{lstlisting}
-    %%%%%%%%=================================
-    \section{Operadores e Express\~{o}es em Scala}
-    %%%%%%%%=================================
 
+    \subsection{Divisão de Inteiros}
+    A divisão entre números inteiros sempre 
+    retorna um número inteiro. Qualquer 
+    parte fracionada é descartada.
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    val x = 5 / 2
+    println(x == 2)//true
+    \end{lstlisting}
+
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    val x = 5 / 2
+    println(x == 2.5)  
+    // ERROR: Operator '==' cannot be applied to 'Double'
+    \end{lstlisting}
+    No caso acima o algoritmo deu erro pois a variavel \emph{x} foi inicializada
+    como inteiro e recebeu um \emph{Double} em seguida.
+    
+    A divisão entre qualquer tipo de inteiro também será sempre
+    verdadeiro, no caso a seguir teremos uma variavel do tipo \emph{Long} 
+    e uma do tipo \emph{Inteiro}.
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    val x = 5L / 2
+    println(x == 2L)//true
+    \end{lstlisting}
+
+    Para retornar um tipo Double é possivel converter um dos argumentos para
+    Double ou para qualquer tipo de dados usando a conversão \emph{.to(tipo desejado)}, Exemplo: toDouble.
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    val x = 5 / 2.toDouble()
+    println(x == 2.5)//true
+    \end{lstlisting}
+
+\section{Operador Bit-a-Bit}
+
+Operadores bitwise(Bit-a-Bit) são utilizados quando precisamos realizar operações 
+a nível de bits com números inteiros, ou seja, trabalhar com sua 
+representação binária.
+
+Kotlin fornece um conjunto de operações bitwise em números inteiros.
+Eles operam no nível binário diretamente com pedaços da representação 
+dos números. As operações bitwise são representadas por funções que 
+podem ser chamadas na forma infixa, Exemplo:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  val x = (1 shl 2) and 0x000FF000
+\end{lstlisting}
+
+Lista dos operadores em kotlin:
+
+\begin{itemize}
+	\item shl(bits) - Deslocamento de bits para a esquerda;
+	\item shr(bits) - Deslocamento de bits para a esquerda;
+	\item and(bits) - Bitwise AND;
+	\item or(bits)  - Bitwise OR;
+	\item xor(bits) - Bitwise XOR;
+	\item inv()     - Inversão Bitwise;
+\end{itemize}
+
+\section{Comparação de números}
+
+As operações sobre números de pontos flutuantes são:
+
+
+\begin{itemize}
+\item
+  Verificação da igualdade:  
+  \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    a == b //'a' igual a 'b'
+    a != b //'b' diferente de 'b'
+  \end{lstlisting}
+
+  \item
+  Operadores de comparação:  
+  \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    a < b  // 'a' menor que 'b' 
+    a > b  // 'a' maior que 'b'
+    a <= b // 'a' menor ou igual que 'b'
+    a >= b // 'a' menor ou igual que 'b'
+  \end{lstlisting}
+\end{itemize}
+
+\section{Tipos Nulos}
+Em Kotlin quando inicializada uma variavel
+    temos a opção de adicionar um ponto de interrogação
+    ao lado do tipo da variavel representando que essa variavel pode
+    receber valor \emph{Null}.
+    
+    \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        var b: String? = "abc" 
+        println(b)//abc
+        b = null
+        print(b)//null
+    \end{lstlisting}
 
