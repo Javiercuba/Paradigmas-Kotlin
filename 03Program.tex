@@ -9,36 +9,112 @@
 \chapter{ Programa\c{c}\~{a}o em Kotlin}
 
 
-   %%%%%%%%======================
-    \section{Entradas e sa\'{\i}das}
-    %%%%%%%%======================
+%%%%%%%%======================
+\section{Expressões condicionais}
 
-          \subsection{Entrada e Sa\'{\i}da formatada}
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun maxOf(a: Int, b: Int): Int {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+  \end{lstlisting}
+  Em Kotlin o condicional \emph{if} pode ser usado também como uma expressão:
+
+  \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    fun maxOf(a: Int, b: Int) = if (a > b) a else b
+  \end{lstlisting}
+  %%%%%%%%======================
+
+%%%%%%%%======================
+
+%%%%%%%%======================
+\section{Funções}
+As funções em Kotlin começam sempre com a palavra \emph{fun}. Os
+parametros da função vem a variavel primeiro e em seguida vem o tipo. 
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun sum(a: Int, b: Int): Int {
+    return a + b
+}
+  \end{lstlisting}
+
+%%%%%%%%======================
+
+\section{Classes}
+Classes em Kotlin são declaradas usando-se uma palavra-chave
+A declaração da classe consiste no nome da classe, no cabeçalho da
+classe (especificando seus parâmetros de tipo, o construtor
+primário e algumas outras coisas) e o corpo da classe entre
+chaves. O cabeçalho e o corpo são opcionais; se a classe não tiver corpo, as chaves podem ser omitidas.
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      class Pessoa { /*...*/ }
+      \end{lstlisting}
+%%%%%%%%======================
 
 
-   %%%%%%%%======================
-    \section{Sele\c{c}\~{a}o}
-    %%%%%%%%======================
-    Tipos de IF
+%%%%%%%%======================
+\section{Construtores}
+Uma classe em Kotlin pode ter um construtor primário ou mais
+ construtores secundários. O construtor primário é uma parte do
+  cabeçalho da classe e vai depois do nome da classe e dos parâmetros
+   de tipo opcionais.
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  class Pessoa constructor(firstName: String) { /*...*/ }
+      \end{lstlisting}
 
-    Select
-
-    %%%%%%%%======================
-    \section{Repeti\c{c}\~{a}o}
-    %%%%%%%%======================
-
-   %%%%%%%%======================
-    \section{Fun\c{c}\~{o}es}
-    %%%%%%%%======================
-
-
-
-   %%%%%%%%======================
-    \section{M\'{o}dulos e Subprogramas}
-    %%%%%%%%======================
+Se o construtor primário não tiver anotações ou modificadores 
+de visibilidade, a constructorpalavra - chave pode ser omitida:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  class Pessoa(firstName: String) { /*...*/ }
+      \end{lstlisting}
+%%%%%%%%======================
 
 
-   \begin{lstlisting}
+%%%%%%%%======================
+\section{Construtores Secundarios}
+Uma classe em Kotlin pode ter um construtor primário ou mais
+ construtores secundários. O construtor primário é uma parte do
+  cabeçalho da classe e vai depois do nome da classe e dos parâmetros
+   de tipo opcionais.
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  class Pessoa constructor(firstName: String) { /*...*/ }
+      \end{lstlisting}
+
+Se o construtor primário não tiver anotações ou modificadores 
+de visibilidade, a constructorpalavra - chave pode ser omitida:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  class Pessoa(firstName: String) { /*...*/ }
+      \end{lstlisting}
+%%%%%%%%======================
+
+\subsection{Entrada e Sa\'{\i}da formatada}
+
+
+%%%%%%%%======================
+\section{Sele\c{c}\~{a}o}
+%%%%%%%%======================
+Tipos de IF
+
+Select
+
+%%%%%%%%======================
+\section{Repeti\c{c}\~{a}o}
+%%%%%%%%======================
+
+%%%%%%%%======================
+\section{Fun\c{c}\~{o}es}
+%%%%%%%%======================
+
+
+
+%%%%%%%%======================
+\section{M\'{o}dulos e Subprogramas}
+%%%%%%%%======================
+
+
+\begin{lstlisting}
 class Rational(n: Int, d: Int) {
 
     require(d != 0)
