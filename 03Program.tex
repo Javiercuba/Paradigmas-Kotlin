@@ -11,7 +11,7 @@
 
 %%%%%%%%======================
 \section{Expressões condicionais}
-
+O condicional em Kotlin normalmente não é diferente das outras linguagens de programação:
 \begin{lstlisting}[label={lst:example1}, language=Kotlin]
   fun maxOf(a: Int, b: Int): Int {
     if (a > b) {
@@ -21,24 +21,255 @@
     }
 }
   \end{lstlisting}
-  Em Kotlin o condicional \emph{if} pode ser usado também como uma expressão:
+É possivel ser usado também como uma expressão:
 
-  \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
     fun maxOf(a: Int, b: Int) = if (a > b) a else b
   \end{lstlisting}
-  %%%%%%%%======================
+
+
+%%%%%%%%======================
+
+%%%%%%%%======================
+\section{Expressões de repetição}
+\subsection{For}
+Kotlin possui duas formas de utilização do \emph{For}:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  val items = listOf("maça", "banana", "abacaxi")
+  \end{lstlisting}
+\begin{itemize}
+  \item Nesse caso o \emph{for} ja percorre a lista toda sem
+        necessidade de receber um valor de parada como normalmente é visto em outras linguagens: 
+        \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    for (item in items) {
+    println(item)  
+    } \* Saida: maça 
+               banana 
+               abacaxi */
+    \end{lstlisting}
+        
+  \item Caso seja necessário usar o indice da lista pode ser feito dessa maneira:
+        \begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    for (index in items.indices) {
+      println("Posição $index é ${items[index]}")
+    }//   
+    \* Saida: Posição 0 é maça 
+              Posição 1 é banana 
+              Posição 2 é abacaxi */  
+  
+  \end{lstlisting}
+\end{itemize}
+
+\subsection{While}
+O While em Kotlin funciona igual as outras linguagens, uma estrutura de parada e um contador no final.  
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  while (index < items.size) {
+    println("item at $index is ${items[index]}")
+    index++
+}
+\end{lstlisting}
+
+
+\subsection{Range}
+Range é usado para verificar se um valor está presente dentro de um conjunto ou valores:
+
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  val x = 5
+  val y = 9
+  if (x in 1..y) {
+      println("dentro")
+  }\\ dentro
+\end{lstlisting}
+Pode ser usado como ums forma de loop também:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  for (x in 1..5) {
+    print(x)
+}\\ 12345
+\end{lstlisting}
+Ou como uma Progressão:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  for (x in 1..10 step 2) {
+    print(x)
+}\\13579
+\end{lstlisting}
 
 %%%%%%%%======================
 
 %%%%%%%%======================
 \section{Funções}
-As funções em Kotlin começam sempre com a palavra \emph{fun}. Os
-parametros da função vem a variavel primeiro e em seguida vem o tipo. 
+As funções em Kotlin começam sempre com a palavra \emph{fun}. 
 \begin{lstlisting}[label={lst:example1}, language=Kotlin]
   fun sum(a: Int, b: Int): Int {
     return a + b
 }
   \end{lstlisting}
+%%%%%%%%======================
+\subsection{Parâmetros}
+Os parâmetros da função são definidos usando a
+notação Pascal -\emph{nome : tipo }. Os parâmetros são separados por vírgulas e cada parâmetro deve ser digitado explicitamente:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun sum(a: Int, b: Int): Int {/*...*/}
+  \end{lstlisting}
+%%%%%%%%======================
+
+%%%%%%%%======================
+\subsection{Argumentos padrão}
+Os parâmetros da função podem ter valores padrão, que são usados ​​quando você ignora o argumento correspondente. Isso reduz o número de sobrecargas:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun read(
+    b: ByteArray,
+    off: Int = 0,
+    len: Int = b.size,
+) { /*...*/ }
+  \end{lstlisting}
+Um valor padrão é definido usando \emph{=} após o tipo.
+
+Os métodos de substituição sempre usam os mesmos valores de parâmetro padrão que o método base. Ao substituir um método que tem valores de parâmetro padrão, os valores de parâmetro padrão devem ser omitidos da assinatura:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    open class A {
+      open fun foo(i: Int = 10) { /*...*/ }
+    }
+
+    class B : A() {
+      override fun foo(i: Int) { /*...*/ }  
+      // Sem valor padrao alocado.
+    }
+    \end{lstlisting}
+
+Se um parâmetro padrão precede um parâmetro sem valor padrão, o valor padrão só pode ser usado chamando a função com argumentos nomeados :
+
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      fun foo(
+    bar: Int = 0,
+    baz: Int,
+    ) { /*...*/ }
+
+    foo(baz = 1) // O valor padrao para é bar = 0.
+      \end{lstlisting}
+
+Se o último argumento após os parâmetros padrão for um lambda , você pode passá-lo como um argumento nomeado ou fora dos parênteses :
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        fun foo(
+          bar: Int = 0,
+          baz: Int = 1,
+          qux: () -> Unit,
+      ) { /*...*/ }
+      
+      foo(1) { println("hello") }     
+      // Usando o valor padrao de baz = 1
+      
+      foo(qux = { println("hello") }) 
+      // Usando ambos os valores padroes bar = 0 e baz = 1
+      
+      foo { println("hello") }        
+      // Usando ambos os valores padroes bar = 0 e baz = 1
+        \end{lstlisting}
+
+%%%%%%%%======================
+
+%%%%%%%%======================
+\subsection{Argumentos nomeados}
+
+Ao chamar uma função, você pode nomear um ou mais de seus argumentos. Isso pode ser útil quando uma função tem muitos argumentos e é difícil associar um valor a um argumento, especialmente se for um booleano ou nullvalor.
+
+Ao usar argumentos nomeados em uma chamada de função, você pode alterar livremente a ordem em que são listados e, se quiser usar seus valores padrão, pode simplesmente deixar esses argumentos de fora.  
+
+Considerando a seguinte função, \emph{reformat()} que possui 4 argumentos com valores padrão.
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun reformat(
+    str: String,
+    normalizeCase: Boolean = true,
+    upperCaseFirstLetter: Boolean = true,
+    divideByCamelHumps: Boolean = false,
+    wordSeparator: Char = ' ',
+) { /*...*/ }
+  \end{lstlisting}
+
+Ao chamar esta função, você não precisa nomear todos os seus argumentos:
+
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+    reformat(
+    "String!",
+    false,
+    upperCaseFirstLetter = false,
+    divideByCamelHumps = true,
+    '_'
+)
+    \end{lstlisting}
+
+Você pode pular todos aqueles com valores padrão:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+      reformat("This is a long String!")
+      \end{lstlisting}
+
+Você também pode pular argumentos específicos com valores padrão, em vez de omitir todos eles. No entanto, após o primeiro argumento ignorado, você deve nomear todos os argumentos subsequentes:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+     reformat("This is a short String!",
+     upperCaseFirstLetter = false,
+     wordSeparator = '_')
+        \end{lstlisting}
+Você pode passar um número variável de argumentos ( vararg) com nomes usando o spreadoperador:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+     fun foo(vararg strings: String) { /*...*/ }
+     foo(strings = *arrayOf("a", "b", "c"))
+          \end{lstlisting}
+%%%%%%%%======================
+
+
+%%%%%%%%======================
+\subsection{Funções de retorno de unidade}
+Se uma função não retorna um valor útil, seu tipo de retorno é \emph{Unit}. \emph{Unit} é um tipo com apenas um valor - \emph{Unit}. Este valor não precisa ser retornado explicitamente:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun printHello(name: String?): Unit {
+    if (name != null)
+        println("Hello $name")
+    else
+        println("Hi there!")
+    // `return Unit` ou `return` é opcional
+}
+       \end{lstlisting}
+A \emph{Unit} declaração do tipo de retorno também é opcional. O código acima é equivalente a:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        fun printHello(name: String?) { ... }
+             \end{lstlisting}
+%%%%%%%%======================
+
+\subsection{Funções de expressão única}
+Quando uma função retorna uma única expressão, as chaves podem ser omitidas e o corpo é especificado após um \emph{=} símbolo:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+ fun double(x: Int): Int = x * 2
+       \end{lstlisting}
+Declarar explicitamente o tipo de retorno é opcional quando pode ser inferido pelo compilador:      
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+ fun double(x: Int) = x * 2
+       \end{lstlisting}
+
+\subsection{Funções locais}
+Kotlin oferece suporte a funções locais, que são funções dentro de outras funções:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+  fun dfs(graph: Graph) {
+    fun dfs(current: Vertex, visited: MutableSet<Vertex>) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v, visited)
+    }
+
+    dfs(graph.vertices[0], HashSet())
+}
+        \end{lstlisting}
+Uma função local pode acessar variáveis ​​locais de funções externas (o fechamento). No caso acima, \emph{visited} pode ser uma variável local:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+   fun dfs(graph: Graph) {
+     val visited = HashSet<Vertex>()
+       fun dfs(current: Vertex) {
+          if (!visited.add(current)) return
+          for (v in current.neighbors)
+               dfs(v)
+        }
+        
+            dfs(graph.vertices[0])
+    }
+                \end{lstlisting}
 
 %%%%%%%%======================
 
@@ -57,9 +288,9 @@ chaves. O cabeçalho e o corpo são opcionais; se a classe não tiver corpo, as 
 %%%%%%%%======================
 \section{Construtores}
 Uma classe em Kotlin pode ter um construtor primário ou mais
- construtores secundários. O construtor primário é uma parte do
-  cabeçalho da classe e vai depois do nome da classe e dos parâmetros
-   de tipo opcionais.
+construtores secundários. O construtor primário é uma parte do
+cabeçalho da classe e vai depois do nome da classe e dos parâmetros
+de tipo opcionais.
 \begin{lstlisting}[label={lst:example1}, language=Kotlin]
   class Pessoa constructor(firstName: String) { /*...*/ }
       \end{lstlisting}
@@ -75,63 +306,62 @@ de visibilidade, a constructorpalavra - chave pode ser omitida:
 %%%%%%%%======================
 \section{Construtores Secundarios}
 Uma classe em Kotlin pode ter um construtor primário ou mais
- construtores secundários. O construtor primário é uma parte do
-  cabeçalho da classe e vai depois do nome da classe e dos parâmetros
-   de tipo opcionais.
+construtores secundários. O construtor primário é uma parte do
+cabeçalho da classe e vai depois do nome da classe e dos parâmetros
+de tipo opcionais.
 \begin{lstlisting}[label={lst:example1}, language=Kotlin]
-  class Pessoa constructor(firstName: String) { /*...*/ }
-      \end{lstlisting}
-
-Se o construtor primário não tiver anotações ou modificadores 
-de visibilidade, a constructorpalavra - chave pode ser omitida:
-\begin{lstlisting}[label={lst:example1}, language=Kotlin]
-  class Pessoa(firstName: String) { /*...*/ }
-      \end{lstlisting}
-%%%%%%%%======================
-
-\subsection{Entrada e Sa\'{\i}da formatada}
-
-
-%%%%%%%%======================
-\section{Sele\c{c}\~{a}o}
-%%%%%%%%======================
-Tipos de IF
-
-Select
-
-%%%%%%%%======================
-\section{Repeti\c{c}\~{a}o}
-%%%%%%%%======================
-
-%%%%%%%%======================
-\section{Fun\c{c}\~{o}es}
-%%%%%%%%======================
-
-
-
-%%%%%%%%======================
-\section{M\'{o}dulos e Subprogramas}
-%%%%%%%%======================
-
-
-\begin{lstlisting}
-class Rational(n: Int, d: Int) {
-
-    require(d != 0)
-
-    val numer: Int = n
-    val denom: Int = d
-
-    def this(n: Int) = this(n, 1) // auxiliary constructor
-
-    override def toString = numer +"/"+ denom
-
-    def add(that: Rational): Rational =
-      new Rational(
-        numer * that.denom + that.numer * denom,
-        denom * that.denom
-      )
+  class Pessoa constructor(val pets: MutableList<Pet> = mutableListOf())) {
+    class Pet {
+      constructor(owner: Pessoa) {
+          owner.pets.add(this) 
+      }
   }
-    \end{lstlisting}
+      \end{lstlisting}
+
+Se a classe tem um construtor primário, cada 
+construtor secundário precisa delegar ao construtor
+primário, direta ou indiretamente por meio de outro (s) construtor (es) secundário (s). A delegação a outro construtor da mesma classe é feita usando a thispalavra-chave:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        class Pessoa(val name: String) {
+          val children: MutableList<Pessoa> = mutableListOf()
+          constructor(name: String, parent: Pessoa) : this(name) {
+              parent.children.add(this)
+          }
+      }
+      \end{lstlisting}
+O código nos blocos inicializadores torna-se efetivamente parte do construtor primário. 
+A delegação ao construtor primário acontece como a primeira instrução de um construtor 
+secundário, portanto, o código em todos os blocos inicializadores e inicializadores de propriedade
+é executado antes do corpo do construtor secundário.
+
+Mesmo que a classe não tenha um construtor primário, a delegação ainda acontece implicitamente e os blocos inicializadores ainda são executados:
+\begin{lstlisting}[label={lst:example1}, language=Kotlin]
+        class Constructors {
+          init {
+              println("bloco inicial")
+          }
+          constructor(i: Int) {
+              println("Constructor $i")
+          }
+        }
+      fun main{
+       Constructors(1)
+      } \\Construtor 1 do bloco de inicialização
+      \end{lstlisting}
+
+Se uma classe não abstrata não declara nenhum construtor (primário ou secundário), ela terá um construtor primário gerado sem argumentos. A visibilidade do construtor será pública.
+
+Se você não quiser que sua classe tenha um construtor público, declare um construtor primário vazio com visibilidade não padrão:
+
+
+
+
+
+
+
+
+%%%%%%%%======================
+
+%%%%%%%%======================
 
 
