@@ -35,20 +35,20 @@
 \begingroup
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
-\coordinate [below=20cm] (midpoint) at (current page.north);
-\node at (current page.north west)
-{\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0)
-        {\includegraphics[width=\paperwidth]{capa_kotlin.png}}; %Capa Imagem A4 21x29.7
-\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]
-        {\paperwidth}
-        {\centering Introdu\c{c}\~{a}o \`{a} Linguagem Kotlin\\[5pt] % Titulo Livro
-{\Large Paradigmas de Linguagens de Programa\c{c}\~{a}o}\\[20pt] % Subtitle
-{\huge   \color{blue} Javier Ernesto Lopez Del Real}\\ % Autor nome
-{\huge  \color{blue} Ausberto S. Castro Vera}\\
-{\small \today}
-}}; % Autor nome
-\end{tikzpicture}};
+        \coordinate [below=20cm] (midpoint) at (current page.north);
+        \node at (current page.north west)
+        {\begin{tikzpicture}[remember picture,overlay]
+                        \node[anchor=north west,inner sep=0pt] at (0,0)
+                        {\includegraphics[width=\paperwidth]{capa_kotlin.png}}; %Capa Imagem A4 21x29.7
+                        \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]
+                        {\paperwidth}
+                        {\centering Introdu\c{c}\~{a}o \`{a} Linguagem Kotlin\\[5pt] % Titulo Livro
+                        {\Large Paradigmas de Linguagens de Programa\c{c}\~{a}o}\\[20pt] % Subtitle
+                        {\huge   \color{blue} Javier Ernesto Lopez Del Real}\\ % Autor nome
+                        {\huge  \color{blue} Ausberto S. Castro Vera}\\
+                        {\small \today}
+                        }}; % Autor nome
+                \end{tikzpicture}};
 \end{tikzpicture}
 \vfill
 
@@ -100,19 +100,26 @@
 \input{01introduc.tex}
 
 \chapterimage{capitulo.jpg} % Chapter heading image
-
-\input{02basicos.tex} 
-\input{03Program.tex} 
-\input{04aplic.tex} 
-%\input{05ferramentas.tex} 
-
-
-%\input{06conclusao.tex} 
+%\input{02basicos.tex}
+%\input{03Program.tex}
+%\input{04aplic.tex}
+%\input{05ferramentas.tex}
 
 
 
+%\input{06conclusao.tex}
+
+
+
+
+
+
+
+
+
+\chapterimage{img_superior}
 \bibliographystyle{alpha}
-\bibliography{Kotlin}
+\bibliography{kotlin}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliografia}}
 %----------------------------------------------------------------------------------------
 %	INDEX
@@ -125,7 +132,7 @@
 \printindex
 
 %----------------------------------------------------------------------------------------
-%\input{ficha.tex}
+\input{ficha.tex}
 
 \end{document}
 
